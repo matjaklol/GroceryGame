@@ -47,8 +47,8 @@ public class Mouse {
 	 * @param event
 	 */
 	public void mouseEvent(MouseEvent event) {
+		//Ignore general move event, since it causes a ton of lag.
 		if(event.getAction() == MouseEvent.MOVE) {
-			
 			return;
 		}
 		
@@ -84,6 +84,7 @@ public class Mouse {
 	 * @param toRegister the specific object to register.
 	 * @param getMovementEvents receive events related to the mouse changing in position. 
 	 */
+	@Deprecated
 	public void registerMethod(String methodName, Object target, boolean getMovementEvents) {
 		this.registerObject(methodName, target);
 	}
@@ -132,7 +133,11 @@ public class Mouse {
 	
 	
 	/**
-	 * Removes a registered method from the mouse handler.
+	 * <p> NOTE: </p><h2><b>ALWAYS UNREGISTER YOUR METHODS WHEN YOU'RE DONE WITH THAT OBJECT.</b></h2>
+	 * 
+	 * <p>Removes a registered method from the mouse handler. Removing a method
+	 * is the sole way to prevent a memory leak, and if not done then you cause 
+	 * that object to stay in memory longer than needed.</p>
 	 * @param name the name of the method to be removed.
 	 * @param target the target object to remove specifically.
 	 */

@@ -10,7 +10,7 @@ import org.dyn4j.world.World;
 public class Scene {
 	protected GameApplet applet;
 	protected Game game;
-	protected World<Body> world;
+	public World<Body> world;
 	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	
 	public Scene(Game game) {
@@ -45,6 +45,11 @@ public class Scene {
 	 */
 	public void sceneChange() {
 		
+	}
+	
+	
+	public World getWorld() {
+		return this.world;
 	}
 	
 	public void addGameObject(GameObject o) {

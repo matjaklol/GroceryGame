@@ -73,6 +73,7 @@
 		<artifactId>dyn4j</artifactId>
 		<version>5.0.2</version>
 	</dependency>
+
   </dependencies>
   <dependencyManagement>
   	<dependencies>

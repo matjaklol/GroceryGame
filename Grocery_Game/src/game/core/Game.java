@@ -9,6 +9,9 @@ import game.util.Constants;
 import game.util.ImageService;
 import processing.event.MouseEvent;
 
+import ddf.minim.Minim;
+import ddf.minim.AudioPlayer;
+
 /**
  * This class handles the host game logic.
  * Here you can access user input, file loading, and physics info.
@@ -93,6 +96,7 @@ public class Game {
 	 */
 	public double oldDelta = 0;
 	
+	private static Minim minim;
 	
 	/**
 	 * Creates the primary game object. This object calculates the delta, handles inputs, and manages all scenes.
@@ -105,6 +109,8 @@ public class Game {
 		instance = this;
 		imageService = new ImageService(applet);
 		mouse = new Mouse(applet);
+		minim = new Minim(applet);
+		
 		
 		
 		//Register primary methods to this object (for a cleaner GameApplet class itself).
@@ -114,7 +120,7 @@ public class Game {
 		applet.registerMethod("mouseEvent", this);
 		
 		//Set "pretty" window title.
-		applet.getSurface().setTitle("Grocery Game v0.0.10");
+		applet.getSurface().setTitle("Grocery Game v0.0.10a");
 		
 		//Attempt preload of larger iomages (this barely works lmao).
 		imageService.getImage("Grocery Bag FRONT.png");
@@ -160,6 +166,12 @@ public class Game {
 	public static ImageService getImageService() {
 		return imageService;
 	}
+	
+	
+	public static Minim getMinim() {
+		return minim;
+	}
+	
 	
 	/**
 	 * Returns a reference to the mouse event service.
@@ -270,6 +282,11 @@ public class Game {
 			this.currentScene.sceneChange();
 		}
 		this.currentScene = newScene;
+	}
+	
+	
+	public Scene getCurrentScene() {
+		return this.currentScene;
 	}
 	
 	

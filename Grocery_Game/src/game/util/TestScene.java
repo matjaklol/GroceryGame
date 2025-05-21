@@ -6,6 +6,9 @@ import org.dyn4j.dynamics.joint.PinJoint;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.AudioSample;
+import ddf.minim.Minim;
 import game.core.Game;
 import game.core.GameApplet;
 import game.core.objects.GameObject;
@@ -13,20 +16,29 @@ import game.core.objects.Rectangle;
 import game.management.Scene;
 import game.actors.GroceryBag;
 import game.actors.products.*;
+import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 public class TestScene extends Scene {
-	Rectangle testObject;
+//	Rectangle testObject;
 	Body mouseBody;
 	PinJoint<Body> joint;
 	GroceryBag bag;
 	CircleProduct teto;
 	private SceneFade fadeIn;
+	
+	private Minim minim;
+	public AudioSample player;
 	public TestScene(Game game) {
 		super(game);
+		GameApplet.getInstance().registerMethod("keyEvent", this);
 		Game.getMouse().registerMethod("mouseEvent", this);
 		applet.randomSeed(0);
+		this.minim = Game.getMinim();
 		
+		player = minim.loadSample("sounds/squish.wav", 512);
+//		player.loop();
+//		player.play();
 		
 		fadeIn = new SceneFade(game);
 		fadeIn.fadeIn(0.5f);
@@ -43,35 +55,28 @@ public class TestScene extends Scene {
 //		world.getSettings().setContinuousDetectionMode(ContinuousDetectionMode.ALL);
 		world.getSettings().setStepFrequency(1.0/120.0);
 		Rectangle floor = new Rectangle(1, 1.4f, 5, 0.3f);
-		testObject = new Rectangle(0, 0, 0.15f, 0.30f);
-		testObject.getBody().getFixture(0).setFriction(0.5);
-		testObject.getBody().setAngularDamping(3);
-//		testObject.getBody().setMass(MassType.NORMAL);
-//		testObject.getBody().setGravityScale(2);
-		testObject.getBody().setBullet(true);
 		
 		
 		
 		
 		floor.getBody().setMass(MassType.INFINITE);
 		floor.getBody().setGravityScale(0);
-//		floor.getBody().setBullet(true);
-		
-//		world.getSettings().setStepFrequency(game.delta);
+		this.world.addBody(floor.getBody());
+		this.gameObjects.add(floor);
 		
 		for(int i = 0; i < 10; i++) {
-			RectangleProduct box = new RectangleProduct(applet.random(0, 2.5f), applet.random(-5, 0), 0.15f, 0.30f);
+			RectangleProduct box = new RectangleProduct(applet.random(0, 2.5f), applet.random(-5, 0), 0.15f, 0.30f, world);
 			
 //			Rectangle box = new Rectangle(applet.random(0, 2.5f), applet.random(-5, 0), 0.15f, 0.30f);
 			box.setImage(Game.getImageService().getImage("CerealBox.png"));
-			box.getBody().setAngularDamping(0.4d);
+//			box.getBody().setAngularDamping(0.4d);
 //			box.getBody().setLinearDamping(0.2d);
-			box.getBody().getFixture(0).setRestitution(0.1);
-			box.getBody().getFixture(0).setFriction(0.5);
-			box.getBody().setMass(MassType.NORMAL);
-			box.getBody().setAtRestDetectionEnabled(false);
+//			box.getBody().getFixture(0).setRestitution(0.1);
+//			box.getBody().getFixture(0).setFriction(0.5);
+//			box.getBody().setMass(MassType.NORMAL);
+//			box.getBody().setAtRestDetectionEnabled(false);
 			gameObjects.add(box);
-			this.world.addBody(box.getBody());
+//			this.world.addBody(box.getBody());
 		}
 		
 		for(int i = 0; i < 0; i++) {
@@ -94,16 +99,20 @@ public class TestScene extends Scene {
 			addGameObject(tetoDynamic);
 		}
 		
-		testObject.setImage(Game.getImageService().getImage("CerealBox.png"));
-		this.gameObjects.add(testObject);
-		this.world.addBody(floor.getBody());
-		this.world.addBody(testObject.getBody());
 		
 		
-		this.gameObjects.add(floor);
+		
+		
 		this.world.setGravity(0, 9.8);
 		this.addGameObject(fadeIn);
 		System.out.println("Meter Width/Height: "+Constants.toMeters(640)+"m/"+Constants.toMeters(360)+"m.");
+	}
+	
+	
+	public void keyEvent(KeyEvent event) {
+		if(event.getAction() == KeyEvent.RELEASE && event.getKeyCode() == 32) { 
+			player.trigger();
+		}
 	}
 	
 	public void mouseEvent(MouseEvent event) {
