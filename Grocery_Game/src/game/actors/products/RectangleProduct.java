@@ -7,6 +7,8 @@ import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
 import org.dyn4j.world.World;
 
+import ddf.minim.AudioSample;
+import ddf.minim.ugens.*;
 import game.core.Game;
 import game.core.objects.GameObject;
 import game.util.CollisionService;
@@ -48,7 +50,6 @@ public class RectangleProduct extends Product {
 		
 		collision = new CollisionService(this.body, "collide", this);
 		
-		System.out.println("World: "+world);
 		world.addBody(body);
 		world.addContactListener(collision);
 		this.setImage(Game.getImageService().emergencyGraphic());
@@ -58,20 +59,51 @@ public class RectangleProduct extends Product {
 		this.world = world;
 	}
 	
-	
-	public void collide(Body other) {
+	private double prevStrength = 0d;
+	private double timeSinceLast = 0d;
+	public void collide(Body other, double strength) {
+		TestScene myScene = (TestScene) Game.get().getCurrentScene();
 		double magChange = this.preVel.getMagnitude() - this.body.getLinearVelocity().getMagnitude();
-		if(magChange >= 3.0d) {
-			//Collided?
-			TestScene myScene = (TestScene) Game.get().getCurrentScene();
+		if(strength > 0.04 && magChange >= 1.0d) {
+			timeSinceLast = 0d;
+//			System.out.println(!(strength + 0.1d >= prevStrength && strength -0.1d <= prevStrength));
+//			prevStrength = strength;
+			
+//			TestScene myScene = (TestScene) Game.get().getCurrentScene();
+//			System.out.println(myScene.player.hasControl(AudioSample.GAIN));
+			float volume = (float) Math.min(0.5f, ((strength-0.03)/0.5d));
+			
+			float gain = 30f * (float) Math.log10(volume);
+//			System.out.println("VOLUME: "+volume+", GAIN: "+gain);
+			
+			float pan = (float)((this.body.getTransform().getTranslationX() - 1.25d)/2.0d);
+			myScene.player.setPan(pan);
+			myScene.player.setGain(gain);
+//			myScene.player.shiftGain(myScene.player.getGain(), volume, 0);
+//			myScene.player.setVolume();
 			myScene.player.trigger();
+			
 		}
+//		
+//		if(magChange >= 2.0d) {
+//			TestScene myScene = (TestScene) Game.get().getCurrentScene();
+////		System.out.println(myScene.player.hasControl(AudioSample.GAIN));
+//			float volume = (float) Math.min(0.5f, (strength/0.5d));
+//		
+//			float gain = 30f * (float) Math.log10(volume);
+//			System.out.println("VOLUME: "+volume+", GAIN: "+gain);
+//			myScene.player.setGain(gain);
+////		myScene.player.shiftGain(myScene.player.getGain(), volume, 0);
+////		myScene.player.setVolume();
+//			myScene.player.trigger();
+//		}
 	}
 	
 	
 	
 	public void update() {
 		this.preVel = body.getLinearVelocity().copy();
+		timeSinceLast += Game.get().delta;
 	}
 	
 	

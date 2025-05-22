@@ -26,7 +26,7 @@ public class CollisionService implements ContactListener<Body> {
 		Class<?> c = toInvoke.getClass();
 		
 		try {
-			method = c.getMethod(methodName, Body.class);
+			method = c.getMethod(methodName, Body.class, double.class);
 		} catch(Exception e) {
 			e.printStackTrace();
 			GameApplet.getInstance().die("[CollisionService] Error in CollisionService Constructor Method: "+e);
@@ -42,9 +42,9 @@ public class CollisionService implements ContactListener<Body> {
 		
 	}
 	
-	private void onCollision(Body other) {
+	private void onCollision(Body other, double strength) {
 		try {
-			method.invoke(toInvoke, other);
+			method.invoke(toInvoke, other, strength);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 			GameApplet.getInstance().die("[CollisionService] Error in CollisionService.onCollision(): "+e);
@@ -93,7 +93,7 @@ public class CollisionService implements ContactListener<Body> {
 	public void postSolve(ContactCollisionData<Body> collision, SolvedContact contact) {
 		if(collision.getBody1().equals(targetBody) || collision.getBody2().equals(targetBody)) {
 			Body other = (collision.getBody1() == targetBody) ? collision.getBody2() : collision.getBody1();
-			onCollision(other);
+			onCollision(other, contact.getNormalImpulse());
 		}
 		
 		

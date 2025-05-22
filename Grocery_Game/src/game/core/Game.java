@@ -120,7 +120,7 @@ public class Game {
 		applet.registerMethod("mouseEvent", this);
 		
 		//Set "pretty" window title.
-		applet.getSurface().setTitle("Grocery Game v0.0.10a");
+		applet.getSurface().setTitle("Grocery Game v0.0.11");
 		
 		//Attempt preload of larger iomages (this barely works lmao).
 		imageService.getImage("Grocery Bag FRONT.png");

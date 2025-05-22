@@ -36,7 +36,7 @@ public class TestScene extends Scene {
 		applet.randomSeed(0);
 		this.minim = Game.getMinim();
 		
-		player = minim.loadSample("sounds/squish.wav", 512);
+		player = minim.loadSample("sounds/impact.wav", 512);
 //		player.loop();
 //		player.play();
 		
@@ -64,7 +64,7 @@ public class TestScene extends Scene {
 		this.world.addBody(floor.getBody());
 		this.gameObjects.add(floor);
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 1; i++) {
 			RectangleProduct box = new RectangleProduct(applet.random(0, 2.5f), applet.random(-5, 0), 0.15f, 0.30f, world);
 			
 //			Rectangle box = new Rectangle(applet.random(0, 2.5f), applet.random(-5, 0), 0.15f, 0.30f);
