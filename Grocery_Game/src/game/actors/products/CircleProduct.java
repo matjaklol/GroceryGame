@@ -2,15 +2,15 @@ package game.actors.products;
 
 import org.dyn4j.dynamics.*;
 import org.dyn4j.geometry.*;
-import org.dyn4j.collision.Fixture;
+//import org.dyn4j.collision.Fixture;
 
 import processing.core.PImage;
 
 import game.util.Constants;
-import game.core.Game;
+//import game.core.Game;
 import game.core.GameApplet;
 import game.core.objects.GameObject;
-import game.management.Scene;
+//import game.management.Scene;
 /**
  * The generic product that uses an elliptical physics collision shape.
  * @author keyboard

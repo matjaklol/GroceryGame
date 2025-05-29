@@ -7,7 +7,7 @@
  */
 module Grocery_Game {
 	//Rendering/processing.
-	requires core;
+	requires transitive core;
 	requires gluegen.rt;
 	requires java.desktop;
 	
@@ -21,12 +21,14 @@ module Grocery_Game {
 	//Sound
 	requires tritonus.aos;
 	requires mp3spi;
-	requires minim;
+	requires transitive minim;
 	
 	//Physics
-	requires org.dyn4j;
+	requires transitive org.dyn4j;
 	
 	exports game.core to core;
 	exports game.userinput to core;
 	exports game.util to core;
+	exports game.management to core;
+	exports game.core.objects to core;
 }

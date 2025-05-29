@@ -1,6 +1,5 @@
 package game.util;
 
-import java.io.File;
 import java.util.*;
 
 import game.core.GameApplet;
@@ -117,8 +116,8 @@ public class ImageService {
 			
 			graphicMap.put(fileName, graphic);
 			this.shapeGraphicsLoad.remove(shapeGraphicsLoad.size()-1);
-			PGraphics p = this.shapeGraphicsCache.get(this.shapeGraphicsCache.size()-1);
-			p = graphic;
+			this.shapeGraphicsCache.get(this.shapeGraphicsCache.size()-1);
+//			p = graphic;
 			this.shapeGraphicsCache.remove(this.shapeGraphicsCache.size()-1);
 			prt("Finished Loading PGraphic: ["+fileName+"]");
 		}

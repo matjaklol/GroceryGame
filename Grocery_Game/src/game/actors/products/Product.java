@@ -3,16 +3,16 @@ package game.actors.products;
 import game.core.objects.GameObject;
 
 import org.dyn4j.dynamics.*;
-import org.dyn4j.geometry.*;
-import org.dyn4j.collision.Fixture;
+//import org.dyn4j.geometry.*;
+//import org.dyn4j.collision.Fixture;
 
 import processing.core.PGraphics;
 import processing.core.PImage;
 
-import game.util.Constants;
+//import game.util.Constants;
 import game.core.Game;
 import game.core.GameApplet;
-import game.management.Scene;
+//import game.management.Scene;
 
 /**
  * The general form of the product class. Used for things you can scan in the grocery store, or even restocking.

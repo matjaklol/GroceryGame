@@ -3,7 +3,6 @@
  */
 package game.core;
 
-import processing.core.PApplet;
 /**
  * @author keyboard
  *

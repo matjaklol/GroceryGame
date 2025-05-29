@@ -8,7 +8,7 @@ import org.dyn4j.geometry.Vector2;
 import game.core.Game;
 import game.core.GameApplet;
 import game.core.objects.GameObject;
-import game.core.objects.Rectangle;
+//import game.core.objects.Rectangle;
 import game.util.BoxBuilder;
 import game.util.Constants;
 import processing.core.PImage;

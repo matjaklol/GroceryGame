@@ -5,11 +5,11 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.opengl.PGraphicsOpenGL;
 
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.util.ArrayList;
+//import java.awt.Dimension;
+//import java.awt.Frame;
+//import java.util.ArrayList;
 
-import game.management.*;
+//import game.management.*;
 
 public class GameApplet extends PApplet{
 	private static GameApplet instance;

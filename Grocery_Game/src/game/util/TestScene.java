@@ -6,7 +6,6 @@ import org.dyn4j.dynamics.joint.PinJoint;
 import org.dyn4j.geometry.MassType;
 import org.dyn4j.geometry.Vector2;
 
-import ddf.minim.AudioPlayer;
 import ddf.minim.AudioSample;
 import ddf.minim.Minim;
 import game.core.Game;
@@ -80,7 +79,7 @@ public class TestScene extends Scene {
 		}
 		
 		for(int i = 0; i < 0; i++) {
-			float size = applet.random(0.15f, 0.3f);
+//			float size = applet.random(0.15f, 0.3f);
 			CircleProduct tetoDynamic = new CircleProduct(applet.random(0f, 2f), applet.random(-5, 0), applet.random(0.10f, 0.30f), applet.random(0.10f, 0.30f));
 //			CircleProduct tetoDynamic = new CircleProduct(applet.random(0f, 2f), applet.random(-5, 0), size, size);
 			int value = (int) Math.floor(applet.random(0, 2));

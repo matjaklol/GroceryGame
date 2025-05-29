@@ -2,7 +2,6 @@ package game.core.objects;
 
 import org.dyn4j.geometry.Transform;
 
-import game.core.GameApplet;
 import game.management.Scene;
 import game.util.Constants;
 import processing.core.PGraphics;

@@ -10,7 +10,6 @@ import game.util.ImageService;
 import processing.event.MouseEvent;
 
 import ddf.minim.Minim;
-import ddf.minim.AudioPlayer;
 
 /**
  * This class handles the host game logic.
@@ -56,6 +55,8 @@ public class Game {
 	/**
 	 * Currently unused list of scenes.
 	 */
+	@SuppressWarnings("unused")
+	@Deprecated
 	private ArrayList<Scene> scenes = new ArrayList<Scene>();
 	
 	
@@ -120,7 +121,7 @@ public class Game {
 		applet.registerMethod("mouseEvent", this);
 		
 		//Set "pretty" window title.
-		applet.getSurface().setTitle("Grocery Game v0.0.11");
+		applet.getSurface().setTitle("Grocery Game v0.0.11b");
 		
 		//Attempt preload of larger iomages (this barely works lmao).
 		imageService.getImage("Grocery Bag FRONT.png");

@@ -42,4 +42,5 @@ public class Constants {
 	public static Vector2 toMeters(float x, float y) {
 		return new Vector2(x / Meter, y / Meter);
 	}
+	
 }

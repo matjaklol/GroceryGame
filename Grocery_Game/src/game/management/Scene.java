@@ -10,6 +10,12 @@ import org.dyn4j.world.World;
 public class Scene {
 	protected GameApplet applet;
 	protected Game game;
+	
+	/**
+	 * This is the primary object used for physics. 
+	 * <p>The current userData is the given scene, so you can use (Scene) {@linkplain World#getUserData()} to
+	 * access the current scene.</p>
+	 */
 	public World<Body> world;
 	protected ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	
@@ -17,6 +23,8 @@ public class Scene {
 		this.game = game;
 		this.applet = GameApplet.getInstance();
 		this.world = new World<Body>();
+		this.world.setUserData(this);
+		
 	}
 	
 	public void update() {};
@@ -38,17 +46,18 @@ public class Scene {
 				gameObjects.remove(i);
 			}
 		}
+		this.world.setUserData(null);
 	}
 	
 	/**
 	 * Called when this scene is being switched out for a new one. 
 	 */
 	public void sceneChange() {
-		
+		this.cleanObjects();
 	}
 	
 	
-	public World getWorld() {
+	public World<Body> getWorld() {
 		return this.world;
 	}
 	
